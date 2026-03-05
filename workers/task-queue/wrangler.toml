@@ -1,0 +1,29 @@
+# BlackRoad OS, Inc. — Proprietary and Confidential
+# Task Queue Worker Configuration
+
+name = "agent-task-queue"
+main = "index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[placement]
+mode = "smart"
+
+# KV for task results
+[[kv_namespaces]]
+binding = "TASK_RESULTS"
+id = "TASK_RESULTS_KV_ID"
+preview_id = "TASK_RESULTS_KV_PREVIEW_ID"
+
+# Dead-letter queue
+[[queues.producers]]
+binding = "TASK_DLQ"
+queue = "agent-tasks-dlq"
+
+# Consumer for the main task queue
+[[queues.consumers]]
+queue = "agent-tasks"
+max_batch_size = 5
+max_retries = 3
+max_batch_timeout = 60
+dead_letter_queue = "agent-tasks-dlq"

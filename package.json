@@ -1,0 +1,47 @@
+{
+  "name": "@blackroad-os/agent-framework",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BlackRoad OS Agent Framework — Build autonomous AI agents with tools, memory, and reasoning",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "BlackRoad OS, Inc.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "wrangler dev",
+    "lint": "eslint src/ workers/ --ext .ts,.tsx",
+    "format": "prettier --write 'src/**/*.ts' 'workers/**/*.ts'",
+    "format:check": "prettier --check 'src/**/*.ts' 'workers/**/*.ts'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:workers": "vitest run --config vitest.workers.config.ts",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy --env production"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.39.0",
+    "hono": "4.7.4",
+    "stripe": "17.7.0",
+    "zod": "3.24.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "4.20250303.0",
+    "@types/node": "22.13.10",
+    "eslint": "9.22.0",
+    "prettier": "3.5.3",
+    "typescript": "5.8.2",
+    "vitest": "3.0.8",
+    "wrangler": "3.99.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "npm@10.9.2"
+}

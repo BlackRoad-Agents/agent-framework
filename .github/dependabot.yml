@@ -1,0 +1,39 @@
+# BlackRoad OS, Inc. — Proprietary and Confidential
+# Dependabot — Automated dependency updates
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "BlackRoad-OS/engineering"
+    labels:
+      - "dependencies"
+      - "automerge"
+    versioning-strategy: "lockfile-only"
+    groups:
+      dev-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "BlackRoad-OS/engineering"
+    labels:
+      - "ci"
+      - "automerge"

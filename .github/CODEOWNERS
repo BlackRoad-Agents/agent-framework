@@ -1,0 +1,20 @@
+# BlackRoad OS, Inc. — Proprietary and Confidential
+# Code Owners — Agent Framework
+
+# Default owners for everything
+* @BlackRoad-OS/engineering
+
+# Workflows require security review
+.github/ @BlackRoad-OS/security @BlackRoad-OS/engineering
+
+# Infrastructure and deployment configs
+wrangler.toml @BlackRoad-OS/infrastructure
+vercel.json @BlackRoad-OS/infrastructure
+railway.json @BlackRoad-OS/infrastructure
+workers/ @BlackRoad-OS/infrastructure @BlackRoad-OS/engineering
+
+# Core agent framework
+src/ @BlackRoad-OS/engineering
+
+# Legal
+LICENSE @BlackRoad-OS/legal

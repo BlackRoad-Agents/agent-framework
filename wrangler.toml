@@ -1,0 +1,48 @@
+# BlackRoad OS, Inc. — Proprietary and Confidential
+# Cloudflare Workers Configuration — Agent Framework
+
+name = "agent-router"
+main = "workers/agent-router/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Account configuration — set via environment or Cloudflare dashboard
+# account_id = "" # Set via CLOUDFLARE_ACCOUNT_ID secret
+
+[placement]
+mode = "smart"
+
+# KV Namespace for agent task metadata
+[[kv_namespaces]]
+binding = "AGENT_KV"
+id = "AGENT_KV_NAMESPACE_ID"
+preview_id = "AGENT_KV_PREVIEW_ID"
+
+# Queue for async task processing
+[[queues.producers]]
+binding = "TASK_QUEUE"
+queue = "agent-tasks"
+
+[[queues.consumers]]
+queue = "agent-tasks"
+max_batch_size = 10
+max_retries = 3
+dead_letter_queue = "agent-tasks-dlq"
+max_batch_timeout = 30
+
+# Scheduled tasks — cleanup stale agent tasks
+[triggers]
+crons = ["0 */6 * * *"]
+
+# Environment-specific overrides
+[env.staging]
+name = "agent-router-staging"
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+
+[env.production]
+name = "agent-router"
+
+[env.production.vars]
+ENVIRONMENT = "production"
